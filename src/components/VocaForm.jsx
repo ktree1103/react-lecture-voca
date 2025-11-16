@@ -1,9 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './VocaForm.css';
 
 function VocaForm({ onAddVoca, onUpdateVoca, editingVoca, onCancelEdit }) {
   const [word, setWord] = useState('');
   const [meaning, setMeaning] = useState('');
+
+  // editingVoca가 변경되면 폼에 데이터 채우기
+  useEffect(() => {
+    if (editingVoca) {
+      setWord(editingVoca.word);
+      setMeaning(editingVoca.meaning);
+    } else {
+      setWord('');
+      setMeaning('');
+    }
+  }, [editingVoca]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

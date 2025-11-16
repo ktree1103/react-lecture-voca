@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { collection, addDoc, Timestamp, onSnapshot, query, orderBy } from 'firebase/firestore';
+import { collection, addDoc, Timestamp, onSnapshot, query, orderBy, doc, updateDoc } from 'firebase/firestore';
 import { db } from './firebase/config';
 import VocaForm from './components/VocaForm';
 import VocaList from './components/VocaList';
@@ -47,9 +47,22 @@ function App() {
     }
   };
 
-  // 단어 수정 (Update) - 다음 단계에서 구현
-  const handleUpdateVoca = (id, vocaData) => {
-    console.log('수정 기능은 다음 단계에서 구현됩니다.');
+  // 단어 수정
+  const handleUpdateVoca = async (id, vocaData) => {
+    try {
+      const docRef = doc(db, 'vocabulary', id);
+      await updateDoc(docRef, {
+        word: vocaData.word,
+        meaning: vocaData.meaning
+      });
+
+      console.log('단어가 수정되었습니다. ID:', id);
+      alert('단어가 성공적으로 수정되었습니다!');
+      setEditingVoca(null); // 수정 완료 후 수정 모드 해제
+    } catch (error) {
+      console.error('단어 수정 오류:', error);
+      alert('단어 수정 중 오류가 발생했습니다.');
+    }
   };
 
   // 단어 삭제 (Delete) - 다음 단계에서 구현
