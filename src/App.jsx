@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { collection, addDoc, Timestamp, onSnapshot, query, orderBy, doc, updateDoc } from 'firebase/firestore';
+import { collection, addDoc, Timestamp, onSnapshot, query, orderBy, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { db } from './firebase/config';
 import VocaForm from './components/VocaForm';
 import VocaList from './components/VocaList';
@@ -65,9 +65,23 @@ function App() {
     }
   };
 
-  // 단어 삭제 (Delete) - 다음 단계에서 구현
-  const handleDeleteVoca = (id) => {
-    console.log('삭제 기능은 다음 단계에서 구현됩니다.');
+  // 단어 삭제
+  const handleDeleteVoca = async (id) => {
+    try {
+      const docRef = doc(db, 'vocabulary', id);
+      await deleteDoc(docRef);
+
+      console.log('단어가 삭제되었습니다. ID:', id);
+      alert('단어가 성공적으로 삭제되었습니다!');
+
+      // 삭제하려는 단어가 현재 수정 중인 단어라면 수정 모드 해제
+      if (editingVoca && editingVoca.id === id) {
+        setEditingVoca(null);
+      }
+    } catch (error) {
+      console.error('단어 삭제 오류:', error);
+      alert('단어 삭제 중 오류가 발생했습니다.');
+    }
   };
 
   // 수정 모드로 전환
