@@ -2,22 +2,24 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  padding: 1.2rem;
   background: #f9f9f9;
-  border-radius: 4px;
+  border-radius: 8px;
   border: 1px solid #eee;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
 }
 
 .voca-item:hover {
   border-color: #4CAF50;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
 }
 
 .voca-content {
   flex: 1;
   display: flex;
   gap: 2rem;
+  align-items: center;
 }
 
 .voca-word {
@@ -30,11 +32,13 @@
 .voca-meaning {
   color: #666;
   font-size: 1rem;
+  line-height: 1.5;
 }
 
 .voca-actions {
   display: flex;
   gap: 0.5rem;
+  flex-shrink: 0;
 }
 
 .btn-edit,
@@ -42,9 +46,12 @@
   padding: 0.5rem 1rem;
   font-size: 0.9rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s ease;
+  font-weight: 600;
+  min-height: 36px;
+  white-space: nowrap;
 }
 
 .btn-edit {
@@ -54,6 +61,8 @@
 
 .btn-edit:hover {
   background-color: #1976D2;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(33, 150, 243, 0.3);
 }
 
 .btn-delete {
@@ -63,4 +72,58 @@
 
 .btn-delete:hover {
   background-color: #d32f2f;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(244, 67, 54, 0.3);
+}
+
+/* 모바일 최적화 */
+@media (max-width: 768px) {
+  .voca-item {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .voca-content {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+
+  .voca-word {
+    font-size: 1.05rem;
+    min-width: auto;
+  }
+
+  .voca-meaning {
+    font-size: 0.95rem;
+  }
+
+  .voca-actions {
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  .btn-edit,
+  .btn-delete {
+    flex: 1;
+    padding: 0.6rem;
+    font-size: 0.85rem;
+    min-height: 44px; /* 터치 친화적 높이 */
+  }
+}
+
+@media (max-width: 480px) {
+  .voca-item {
+    padding: 0.8rem;
+  }
+
+  .voca-word {
+    font-size: 1rem;
+  }
+
+  .voca-meaning {
+    font-size: 0.9rem;
+  }
 }

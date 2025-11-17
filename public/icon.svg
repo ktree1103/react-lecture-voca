@@ -1,15 +1,20 @@
 <svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="512" height="512" rx="64" fill="#4CAF50"/>
-  <rect x="96" y="64" width="320" height="384" rx="16" fill="white"/>
-  <rect x="136" y="128" width="240" height="24" rx="12" fill="#E8F5E9"/>
-  <text x="156" y="146" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2E7D32">Apple</text>
-  <text x="350" y="146" font-family="Arial, sans-serif" font-size="16" fill="#666">사과</text>
-  <rect x="136" y="184" width="240" height="24" rx="12" fill="#E8F5E9"/>
-  <text x="156" y="202" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2E7D32">Book</text>
-  <text x="350" y="202" font-family="Arial, sans-serif" font-size="16" fill="#666">책</text>
-  <rect x="136" y="240" width="240" height="24" rx="12" fill="#E8F5E9"/>
-  <text x="156" y="258" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2E7D32">Cat</text>
-  <text x="350" y="258" font-family="Arial, sans-serif" font-size="16" fill="#666">고양이</text>
-  <circle cx="256" cy="400" r="32" fill="#4CAF50"/>
-  <path d="M244 400 L252 408 L268 392" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" rx="100" fill="url(#bgGradient)"/>
+
+  <!-- Book shape -->
+  <path d="M 140 120 L 372 120 L 372 392 L 256 420 L 140 392 Z" fill="white" opacity="0.95"/>
+
+  <!-- Book spine shadow -->
+  <path d="M 256 120 L 256 420" stroke="#5a67d8" stroke-width="3" opacity="0.3"/>
+
+  <!-- Letter A -->
+  <text x="256" y="320" font-family="Arial, sans-serif" font-size="180" font-weight="bold" fill="url(#bgGradient)" text-anchor="middle">A</text>
 </svg>

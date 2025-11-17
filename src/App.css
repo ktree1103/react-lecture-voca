@@ -1,52 +1,60 @@
+* {
+  box-sizing: border-box;
+}
+
 .app {
   min-height: 100vh;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
 }
 
-.container {
-  max-width: 800px;
-  margin: 0 auto;
+.app-content {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 70px; /* 바텀 네비게이션 공간 확보 */
 }
 
-.app-header {
-  text-align: center;
-  margin-bottom: 2rem;
-  color: white;
-}
-
-.app-header h1 {
-  font-size: 2.5rem;
-  margin: 0 0 0.5rem 0;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.app-header p {
-  font-size: 1.1rem;
-  margin: 0;
-  opacity: 0.9;
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
 }
 
 .loading {
   text-align: center;
   padding: 3rem;
   background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   color: #666;
   font-size: 1.1rem;
+  max-width: 400px;
+  width: 100%;
 }
 
+/* 모바일 최적화 */
 @media (max-width: 768px) {
-  .app {
-    padding: 1rem 0.5rem;
+  .app-content {
+    padding-bottom: 70px;
   }
 
-  .app-header h1 {
-    font-size: 2rem;
-  }
-
-  .app-header p {
+  .loading {
+    padding: 2rem;
     font-size: 1rem;
+  }
+}
+
+/* 작은 모바일 화면 */
+@media (max-width: 480px) {
+  .app-content {
+    padding-bottom: 70px;
+  }
+
+  .loading {
+    padding: 1.5rem;
+    font-size: 0.95rem;
   }
 }

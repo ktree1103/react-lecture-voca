@@ -1,0 +1,67 @@
+.view-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  padding-bottom: 80px; /* 바텀 네비게이션 공간 확보 */
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.page-header h2 {
+  color: #333;
+  font-size: 28px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.page-header p {
+  color: #666;
+  font-size: 14px;
+  margin: 0;
+}
+
+.edit-form-container {
+  background: #fff3cd;
+  border: 2px solid #ffc107;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.edit-form-container h3 {
+  color: #856404;
+  font-size: 18px;
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+/* 모바일 최적화 */
+@media (max-width: 768px) {
+  .view-page {
+    padding: 16px;
+    padding-bottom: 80px;
+  }
+
+  .page-header h2 {
+    font-size: 24px;
+  }
+
+  .page-header p {
+    font-size: 13px;
+  }
+
+  .edit-form-container {
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+
+  .edit-form-container h3 {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+}

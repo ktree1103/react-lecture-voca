@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { collection, addDoc, Timestamp, onSnapshot, query, orderBy, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { db } from './firebase/config';
-import VocaForm from './components/VocaForm';
-import VocaList from './components/VocaList';
+import BottomNavigation from './components/BottomNavigation';
+import RegisterPage from './pages/RegisterPage';
+import ViewPage from './pages/ViewPage';
+import TestPage from './pages/TestPage';
 import './App.css';
 
 function App() {
   const [vocaList, setVocaList] = useState([]);
-  const [editingVoca, setEditingVoca] = useState(null);
   const [loading, setLoading] = useState(true);
 
   // Firestore에서 실시간으로 단어 목록 가져오기
@@ -58,7 +60,6 @@ function App() {
 
       console.log('단어가 수정되었습니다. ID:', id);
       alert('단어가 성공적으로 수정되었습니다!');
-      setEditingVoca(null); // 수정 완료 후 수정 모드 해제
     } catch (error) {
       console.error('단어 수정 오류:', error);
       alert('단어 수정 중 오류가 발생했습니다.');
@@ -73,53 +74,52 @@ function App() {
 
       console.log('단어가 삭제되었습니다. ID:', id);
       alert('단어가 성공적으로 삭제되었습니다!');
-
-      // 삭제하려는 단어가 현재 수정 중인 단어라면 수정 모드 해제
-      if (editingVoca && editingVoca.id === id) {
-        setEditingVoca(null);
-      }
     } catch (error) {
       console.error('단어 삭제 오류:', error);
       alert('단어 삭제 중 오류가 발생했습니다.');
     }
   };
 
-  // 수정 모드로 전환
-  const handleEditVoca = (voca) => {
-    setEditingVoca(voca);
-  };
-
-  // 수정 취소
-  const handleCancelEdit = () => {
-    setEditingVoca(null);
-  };
+  if (loading) {
+    return (
+      <div className="app">
+        <div className="loading-container">
+          <div className="loading">단어 목록을 불러오는 중...</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="app">
-      <div className="container">
-        <header className="app-header">
-          <h1>영어 단어장</h1>
-          <p>영어 단어를 등록하고 관리하세요</p>
-        </header>
-
-        <VocaForm
-          onAddVoca={handleAddVoca}
-          onUpdateVoca={handleUpdateVoca}
-          editingVoca={editingVoca}
-          onCancelEdit={handleCancelEdit}
-        />
-
-        {loading ? (
-          <div className="loading">단어 목록을 불러오는 중...</div>
-        ) : (
-          <VocaList
-            vocaList={vocaList}
-            onEdit={handleEditVoca}
-            onDelete={handleDeleteVoca}
-          />
-        )}
+    <BrowserRouter>
+      <div className="app">
+        <div className="app-content">
+          <Routes>
+            <Route path="/" element={<Navigate to="/register" replace />} />
+            <Route
+              path="/register"
+              element={<RegisterPage onAddVoca={handleAddVoca} />}
+            />
+            <Route
+              path="/view"
+              element={
+                <ViewPage
+                  vocaList={vocaList}
+                  onEdit={() => {}}
+                  onDelete={handleDeleteVoca}
+                  onUpdateVoca={handleUpdateVoca}
+                />
+              }
+            />
+            <Route
+              path="/test"
+              element={<TestPage vocaList={vocaList} />}
+            />
+          </Routes>
+        </div>
+        <BottomNavigation />
       </div>
-    </div>
+    </BrowserRouter>
   );
 }
 
